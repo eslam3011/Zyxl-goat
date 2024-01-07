@@ -39,7 +39,7 @@ let i = args.join(" ")
 
 if ( i !== '' ){
 const url = 
-`https://gptzaid.zaidbot.repl.co/1/text=${i}`;
+`https://hercai.onrender.com/v3/hercai?question=${i}`;
 
 https.get(url, (response) => {
  let data = '';
@@ -49,7 +49,7 @@ https.get(url, (response) => {
  });
 
  response.on('end', () => {
- message.send(data);
+ message.send(data.reply);
  });
 }).on('error', (error) => {
  console.error(`حدث خطأ: ${error.message}`);
