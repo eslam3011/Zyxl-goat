@@ -39,7 +39,7 @@ message.send("عملية الرسم من الممكن ان تأخذ بعض ال�
 
 (async () => {
  try {
- const response = await axios.get(`https://zark-ai.repl.co/${args.join(' ')}`);
+ const response = await axios.get(`https://2q2s4h-3000.csb.app/${args.join(' ')}`);
  const images = response.data;
 
  for (let i = 0; i < images.length; i++) {

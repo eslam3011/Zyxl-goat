@@ -35,13 +35,12 @@ module.exports = {
 	onStart: async function ({ api, args, message, event, threadsData, usersData, dashBoardData, globalData, threadModel, userModel, dashBoardModel, globalModel, role, commandName, getLang }) {
 		const https = require('https');
 
-let i = args.join(" ")
+ let i = args.join(" ");
 
-if ( i !== '' ){
-const url = 
-`https://hercai.onrender.com/v3/hercai?question=${i}`;
+ if (i !== '') {
+ const url = `https://hercai.onrender.com/v3/hercai?question=${encodeURIComponent(i)}`;
 
-https.get(url, (response) => {
+ https.get(url, (response) => {
  let data = '';
 
  response.on('data', (chunk) => {
@@ -49,14 +48,20 @@ https.get(url, (response) => {
  });
 
  response.on('end', () => {
- message.send(data.reply);
+ try {
+ const responseData = JSON.parse(data);
+ message.send(responseData.reply);
+ } catch (error) {
+ console.error(`حدث خطأ في تحليل البيانات: ${error.message}`);
+ }
  });
-}).on('error', (error) => {
+ }).on('error', (error) => {
  console.error(`حدث خطأ: ${error.message}`);
-});
-}
-else {
-console.log("hi")
-}
+ });
+ } else {
+ console.log("hi");
+ }
+ 
+
 	}
 };
